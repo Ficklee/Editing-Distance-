@@ -6,6 +6,9 @@
 #include <codecvt>
 #include <cstdio>
 #include <string>
+#include <vector>
+#include "dbscan.h"
+#include <queue>
 using namespace std;
 
 int ReadInSentence(u16string **Storage,const string WriteInFile){
@@ -42,7 +45,7 @@ int ReadInSentence(u16string **Storage,const string WriteInFile){
     return LineNum;
 }
 
-int EditingDistance(const u16string s1,const u16string s2){
+/*int EditingDistance(const u16string s1,const u16string s2){
     int len1,len2,cost,distance;
     len1 = s1.length();
     len2 = s2.length();
@@ -70,10 +73,33 @@ int EditingDistance(const u16string s1,const u16string s2){
     return distance;
 }
 
-
+int CreateDistanceMatrix(string** CorpusStorage,int** &DistanceMatrix, const str ReadInFile){
+    int Line_num;
+    Line_num = ReadInSentence(CorpusStorage,ReadInFile);
+    DistanceMatrix = new *int[Line_num];
+    for (int i=0;i<Line_num;i++){
+        DistanceMatrix[i] = new int[Line_num];
+    }
+    for (int row=0;row<Line_num;row++)
+        for (int col=0;col<Line_num;col++){
+            if (col<=row)
+                DistanceMatrix[row][col]=0;
+            else
+                DistanceMatrix[row][col]=EditingDistance(CorpusStorage[row], CorpusStorage[col]);
+        }
+    return Line_num;
+}
+int* PrecomputedDistanceDBSCAN(const int** DistanceMatrix,int Number,double e,int core_threshold){
+    vector<vector<int>> ClassifyGroup;
+    int Cur_GroupNum;
+    int Cur_;
+    while ()
+    
+}*/
 int main() {
     //std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> cvt;
     //int argc, const char * argv[];
+    /*
     std::string corpusFile="./test.txt";
     int Line_num;
     u16string* CorpusStorage;
@@ -106,6 +132,7 @@ int main() {
     }
     delete[] DistanceMatrix;
     delete[] CorpusStorage;
-    
+    */
+    cout<<"hello"<<endl;
     return 0;
 }
