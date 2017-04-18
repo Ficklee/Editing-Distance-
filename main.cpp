@@ -120,18 +120,13 @@ int main() {
         Out<<"\n";
     }
     Out.close();*/
-    for (int x=0;x<Line_num;x++){
-        for (int y=0;y<Line_num;y++){
-            cout<<DistanceMatrix[x][y]<<endl;
-        }
-    }
     std::vector<int> ClassifyVec;
     int e = 3;
     int minpts = 2;
     DBScan(minpts,e,Line_num,&(DistanceMatrix),ClassifyVec);
-    for (auto i = ClassifyVec.begin();i!=ClassifyVec.end();i++){
+    /*for (auto i = ClassifyVec.begin();i!=ClassifyVec.end();i++){
         cout<<(*i)<<endl;
-    }
+    }*/
     for (int l1=0;l1<Line_num;l1++){
         delete[] DistanceMatrix[l1];
     }

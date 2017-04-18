@@ -35,12 +35,6 @@ std::queue<int> RegionQuery(int cur_ptr,int e,int Number,int*** DiMatrix)
             TempDisMatrix[j1][k1] = *((*(DiMatrix+j1))+k1);
         }
     }*/
-    for (int x=0;x<Number;x++){
-        for (int y =0;y<Number;y++){
-            //std::cout<<(*(*(DiMatrix+x))+y)<<std::endl;
-            continue;
-        }
-    }
     for (int i=0;i<Number;i++){
         if (i==cur_ptr)
             continue;
