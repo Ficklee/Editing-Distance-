@@ -26,7 +26,7 @@ std::queue<int> RegionQuery(int cur_ptr,int e,int Number,int **DiMatrix)
 {
     std::queue<int> Seeds;
     Seeds.push(cur_ptr);
-    int **TempDisMatrix = new int*[Number];
+   /* int **TempDisMatrix = new int*[Number];
     for (int i1=0; i1<Number;i1++){
         TempDisMatrix[i1] = new int[Number];
     }
@@ -34,23 +34,24 @@ std::queue<int> RegionQuery(int cur_ptr,int e,int Number,int **DiMatrix)
         for (int k1=0;k1<Number;k1++){
             TempDisMatrix[j1][k1] = *((*(DiMatrix+j1))+k1);
         }
-    }
+    }*/
     for (int i=0;i<Number;i++){
         if (i==cur_ptr)
             continue;
         if (i<cur_ptr){
-            if(TempDisMatrix[i][cur_ptr]<=e)
+            if ( (*(*(DiMatrix+i))+cur_ptr)<=e )
                 Seeds.push(i);
         }
         else {
-            if (TempDisMatrix[cur_ptr][i]<=e)
+            if ( (*(*(DiMatrix+cur_ptr))+i)<=e )
                 Seeds.push(i);
         }
     }
+    /*
     for (int D1=0;D1<Number;D1++){
         delete [] TempDisMatrix[D1];
     }
-    delete [] TempDisMatrix;
+    delete [] TempDisMatrix;*/
     return Seeds;
 }
 bool ExpandCluster(int Number,int** DiMatrix, int cur_ptr, int cur_classify_no, 
@@ -68,6 +69,7 @@ std::vector<int> &ClassifyReslt,int e, int minpts){
         ClassifyReslt[travesal_ptr] = cur_classify_no;
         std::queue<int> TempQueue = RegionQuery(travesal_ptr,e,Number,DiMatrix);
         if (TempQueue.size()>=minpts){
+            TempQueue.pop();
             while (!TempQueue.empty()){
                 int resultP = TempQueue.front();
                 TempQueue.pop();
