@@ -6,8 +6,7 @@ std::vector<int> test(){
     return a;
 };
 
-void DBScan(int minpts,int e,int Line_num,
-                                     int** DistanceMatrix,std::vector<int> &ClassifyReslt)
+void DBScan(int minpts,int e,int Line_num,int** DistanceMatrix,std::vector<int> &ClassifyReslt)
 {
     int Number = Line_num;
     if (!ClassifyReslt.empty())
@@ -19,11 +18,7 @@ void DBScan(int minpts,int e,int Line_num,
     for (cur_ptr = 0; cur_ptr<Number;cur_ptr++){
         if (ClassifyReslt[cur_ptr]==0){
             if (ExpandCluster(Number,DistanceMatrix,cur_ptr,cur_classify_no,ClassifyReslt,e,minpts))
-                cur_classify_no++;
-            else {
-                ClassifyReslt[cur_ptr] = -1;
-                cur_classify_no++;
-            }          
+                cur_classify_no++;       
         }
     }
 }
