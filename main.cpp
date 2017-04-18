@@ -45,7 +45,7 @@ int ReadInSentence(u16string **Storage,const string WriteInFile){
     return LineNum;
 }
 
-/*int EditingDistance(const u16string s1,const u16string s2){
+int EditingDistance(const u16string s1,const u16string s2){
     int len1,len2,cost,distance;
     len1 = s1.length();
     len2 = s2.length();
@@ -72,7 +72,7 @@ int ReadInSentence(u16string **Storage,const string WriteInFile){
     delete [] Mat;
     return distance;
 }
-
+/*
 int CreateDistanceMatrix(string** CorpusStorage,int** &DistanceMatrix, const str ReadInFile){
     int Line_num;
     Line_num = ReadInSentence(CorpusStorage,ReadInFile);
@@ -88,18 +88,10 @@ int CreateDistanceMatrix(string** CorpusStorage,int** &DistanceMatrix, const str
                 DistanceMatrix[row][col]=EditingDistance(CorpusStorage[row], CorpusStorage[col]);
         }
     return Line_num;
-}
-int* PrecomputedDistanceDBSCAN(const int** DistanceMatrix,int Number,double e,int core_threshold){
-    vector<vector<int>> ClassifyGroup;
-    int Cur_GroupNum;
-    int Cur_;
-    while ()
-    
 }*/
 int main() {
-    //std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> cvt;
+    std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> cvt;
     //int argc, const char * argv[];
-    /*
     std::string corpusFile="./test.txt";
     int Line_num;
     u16string* CorpusStorage;
@@ -117,6 +109,7 @@ int main() {
                 DistanceMatrix[row][col]=EditingDistance(CorpusStorage[row], CorpusStorage[col]);
         }
     //cout<<DistanceMatrix[0][1]<<endl;
+    /*
     ofstream Out("./DistanceMatrix.txt");
     for (int w1=0;w1<Line_num;w1++){
         for (int y1=0;y1<Line_num;y1++){
@@ -126,13 +119,24 @@ int main() {
         }
         Out<<"\n";
     }
-    Out.close();
+    Out.close();*/
+    for (int x=0;x<Line_num;x++){
+        for (int y=0;y<Line_num;y++){
+            cout<<DistanceMatrix[x][y]<<endl;
+        }
+    }
+    std::vector<int> ClassifyVec;
+    int e = 3;
+    int minpts = 2;
+    DBScan(minpts,e,Line_num,&(DistanceMatrix),ClassifyVec);
+    for (auto i = ClassifyVec.begin();i!=ClassifyVec.end();i++){
+        cout<<(*i)<<endl;
+    }
     for (int l1=0;l1<Line_num;l1++){
         delete[] DistanceMatrix[l1];
     }
     delete[] DistanceMatrix;
     delete[] CorpusStorage;
-    */
     cout<<"hello"<<endl;
     return 0;
 }

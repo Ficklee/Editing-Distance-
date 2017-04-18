@@ -6,7 +6,7 @@ std::vector<int> test(){
     return a;
 };
 
-void DBScan(int minpts,int e,int Line_num,int** DistanceMatrix,std::vector<int> &ClassifyReslt)
+void DBScan(int minpts,int e,int Line_num,int*** DistanceMatrix,std::vector<int> &ClassifyReslt)
 {
     int Number = Line_num;
     if (!ClassifyReslt.empty())
@@ -22,7 +22,7 @@ void DBScan(int minpts,int e,int Line_num,int** DistanceMatrix,std::vector<int> 
         }
     }
 }
-std::queue<int> RegionQuery(int cur_ptr,int e,int Number,int **DiMatrix)
+std::queue<int> RegionQuery(int cur_ptr,int e,int Number,int*** DiMatrix)
 {
     std::queue<int> Seeds;
     Seeds.push(cur_ptr);
@@ -35,15 +35,24 @@ std::queue<int> RegionQuery(int cur_ptr,int e,int Number,int **DiMatrix)
             TempDisMatrix[j1][k1] = *((*(DiMatrix+j1))+k1);
         }
     }*/
+    for (int x=0;x<Number;x++){
+        for (int y =0;y<Number;y++){
+            //std::cout<<(*(*(DiMatrix+x))+y)<<std::endl;
+            continue;
+        }
+    }
     for (int i=0;i<Number;i++){
         if (i==cur_ptr)
             continue;
         if (i<cur_ptr){
-            if ( (*(*(DiMatrix+i))+cur_ptr)<=e )
+            //std::cout<<(*(*(DiMatrix+i))+cur_ptr)<<std::endl;
+            //if ( (*(*(DiMatrix+i))+cur_ptr)<=e )
+            if (*(*((*DiMatrix)+i)+cur_ptr)<=e)
                 Seeds.push(i);
         }
         else {
-            if ( (*(*(DiMatrix+cur_ptr))+i)<=e )
+            //std::cout<<(*(*(DiMatrix+cur_ptr))+i)<<std::endl;
+            if (*(*((*DiMatrix)+cur_ptr)+i)<=e)
                 Seeds.push(i);
         }
     }
@@ -54,7 +63,7 @@ std::queue<int> RegionQuery(int cur_ptr,int e,int Number,int **DiMatrix)
     delete [] TempDisMatrix;*/
     return Seeds;
 }
-bool ExpandCluster(int Number,int** DiMatrix, int cur_ptr, int cur_classify_no, 
+bool ExpandCluster(int Number,int*** DiMatrix, int cur_ptr, int cur_classify_no, 
 std::vector<int> &ClassifyReslt,int e, int minpts){
     std::queue<int> seeds = RegionQuery(cur_ptr,e,Number,DiMatrix);
     if (seeds.size()<minpts){
