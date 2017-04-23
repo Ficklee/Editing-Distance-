@@ -42,22 +42,14 @@ std::queue<int> RegionQuery(int cur_ptr,int e,int Number,int** DiMatrix)
         if (i==cur_ptr)
             continue;
         if (i<cur_ptr){
-            //std::cout<<(*(*(DiMatrix+i))+cur_ptr)<<std::endl;
-            //if ( (*(*(DiMatrix+i))+cur_ptr)<=e )
             if (*(*(DiMatrix+i)+cur_ptr)<=e)
                 Seeds.push(i);
         }
         else {
-            //std::cout<<(*(*(DiMatrix+cur_ptr))+i)<<std::endl;
             if (*(*(DiMatrix+cur_ptr)+i)<=e)
                 Seeds.push(i);
         }
     }
-    /*
-    for (int D1=0;D1<Number;D1++){
-        delete [] TempDisMatrix[D1];
-    }
-    delete [] TempDisMatrix;*/
     return Seeds;
 }
 bool ExpandCluster(int Number,int** DiMatrix, int cur_ptr, int cur_classify_no, 
