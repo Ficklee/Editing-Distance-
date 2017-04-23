@@ -1,11 +1,5 @@
 #include "dbscan.h"
 
-std::vector<int> test(){
-    std::vector<int> a;
-    a.push_back(1);
-    return a;
-};
-
 void DBScan(int minpts,int e,int Line_num,int*** DistanceMatrix,std::vector<int> &ClassifyReslt)
 {
     int Number = Line_num;
